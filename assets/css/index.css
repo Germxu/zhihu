@@ -1,0 +1,11 @@
+body {
+  margin: 0;
+  /* background-color: cornsilk; */
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+a {
+  text-decoration: none;
+  color: unset;
+  display: inline-flex;
+  align-items: center;
+}

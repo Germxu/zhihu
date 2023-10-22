@@ -7,7 +7,7 @@
       :class="{ 'shadow-[0_-3.5px_0_-1px_#f00] pt-12px': i.censored }"
       @click="getInfo(i.answerID)"
     >
-      <div class="line-height-8 text-justify">
+      <div class="line-height-8 line-clamp-5 text-justify">
         {{ itemFilter(i.excerpt).content }}
       </div>
       <!-- <span class="color-#aaa font-size-3">{{ i.answerID }}</span> -->

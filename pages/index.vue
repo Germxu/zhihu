@@ -1,18 +1,23 @@
 <template>
-  <div>
-    <ul>
-      <li v-for="i in list.data">
-        <NuxtLink :to="'/question/' + i.id">
+  <ul>
+    <li v-for="i in list.data">
+      <NuxtLink
+        :to="'/question/' + i.id"
+        class="flex align-center justify-between"
+      >
+        <div>
           <p>{{ i.title }}</p>
           <span>{{ i.censoredTimeOrAnswerCensoredUpdated }}</span>
-          <div>
+        </div>
+        <div class="text-#999 text-12px flex flex-col truncate text-center">
+          <img :src="i.authorAvatarURL" alt="avatar" />
+          <span>
             {{ i.authorName }}
-            <img :src="i.authorAvatarURL" alt="avatar" />
-          </div>
-        </NuxtLink>
-      </li>
-    </ul>
-  </div>
+          </span>
+        </div>
+      </NuxtLink>
+    </li>
+  </ul>
 </template>
 
 <script setup>
@@ -41,7 +46,7 @@ ul {
   padding: 0;
   list-style: none;
   li {
-    margin-bottom: 20px;
+    margin-bottom: 10px;
     // display: flex;
     // flex-wrap: wrap;
     padding-bottom: 20px;

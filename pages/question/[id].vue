@@ -3,8 +3,17 @@
     <h3 class="m-16px">{{ info?.data?.title }}</h3>
     <div
       v-for="i in info?.data.answers"
-      class="mb-30px p-15px bg-#eee9 rd overflow-hidden mx-16px cursor-pointer"
-      :class="{ 'shadow-[0_-3.5px_0_-1px_#f00] pt-12px': i.censored }"
+      class="
+        relative
+        mb-30px
+        p-15px
+        bg-#eee6
+        rd
+        overflow-hidden
+        mx-16px
+        cursor-pointer
+      "
+      :class="{ 'censor-item': i.censored }"
       @click="getInfo(i.answerID)"
     >
       <div class="line-height-8 line-clamp-5 text-justify">
@@ -73,3 +82,24 @@ const getInfo = (id) => {
   console.log(id);
 };
 </script>
+<style lang="scss" scoped>
+.censor-item {
+  text-indent: 1.5em;
+  background: #eee;
+  &:first-letter {
+    font-size: 2em;
+  }
+  &:before {
+    content: '已审查';
+    position: absolute;
+    left: -22px;
+    top: 11px;
+    transform: rotate(-45deg);
+    font-size: 13px;
+    color: #fff;
+    background: #ffc107;
+    padding: 0 20px;
+    text-indent: 0;
+  }
+}
+</style>

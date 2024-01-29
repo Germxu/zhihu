@@ -6,8 +6,10 @@
         class="flex align-center justify-between"
       >
         <div>
-          <p>{{ i.title }}</p>
-          <span>{{ i.censoredTimeOrAnswerCensoredUpdated }}</span>
+          <p class="text-14px">{{ i.title }}</p>
+          <span class="text-14px">
+            {{ i.censoredTimeOrAnswerCensoredUpdated }}
+          </span>
         </div>
         <div class="text-#999 text-12px flex flex-col truncate text-center">
           <img :src="i.authorAvatarURL" alt="avatar" />

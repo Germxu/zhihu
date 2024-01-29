@@ -7,7 +7,7 @@
       >
         <div>
           <p class="text-14px">{{ i.title }}</p>
-          <span class="text-14px">
+          <span class="text-13px">
             {{ i.censoredTimeOrAnswerCensoredUpdated }}
           </span>
         </div>

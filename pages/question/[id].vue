@@ -8,7 +8,6 @@
         mb-30px
         p-15px
         bg-#eee6
-        rd
         overflow-hidden
         mx-16px
         cursor-pointer

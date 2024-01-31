@@ -10,6 +10,7 @@
         bg-#eee6
         overflow-hidden
         mx-16px
+        rd-4
         cursor-pointer
       "
       :class="{ 'censor-item': i.censored }"

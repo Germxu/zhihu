@@ -15,9 +15,10 @@
       :class="{ 'censor-item': i.censored }"
       @click="getInfo(i.answerID)"
     >
-      <div class="line-height-8 line-clamp-5 text-justify">
-        {{ itemFilter(i.excerpt).content }}
-      </div>
+      <div
+        class="line-height-8 line-clamp-5 text-justify"
+        v-html="i.content"
+      ></div>
       <!-- <span class="color-#aaa font-size-3">{{ i.answerID }}</span> -->
       <div
         class="flex flex-justify-between flex-items-center mt-20px color-#999"

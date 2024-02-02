@@ -1,15 +1,16 @@
 <template>
   <div class="max-w-3xl ma">
-    <h3 class="m-16px">{{ info?.data?.title }}</h3>
+    <h3 class="m-16px leading-8 text-6">{{ info?.data?.title }}</h3>
     <div
       v-for="i in info?.data.answers"
       class="
         relative
         mb-30px
         p-15px
-        bg-#eee6
+        bg-#ececec
         overflow-hidden
         mx-16px
+        rd-4
         cursor-pointer
       "
       :class="{ 'censor-item': i.censored }"
@@ -29,7 +30,7 @@
           </div>
         </div>
 
-        <div>
+        <div :class="{ 'blur-3 hover:blur-0': i.censored }">
           <!-- <span class="vertical-68%"> </span> -->
           <a
             :href="'https://www.zhihu.com/people/' + i.author.urlToken"
@@ -83,6 +84,8 @@ const getInfo = (id) => {
 };
 </script>
 <style lang="scss" scoped>
+@import 'https://static.zhihu.com/heifetz/main.216a26f4.636280215996da924864.css';
+@import 'https://static.zhihu.com/heifetz/main-question-routes.216a26f4.76cd58bb46c08ca4ab3c.css';
 .censor-item {
   text-indent: 1.5em;
   background: #eee;
@@ -101,5 +104,12 @@ const getInfo = (id) => {
     padding: 0 20px;
     text-indent: 0;
   }
+}
+:deep img {
+  max-width: 100%;
+  height: auto;
+}
+:deep .ContentItem-actions {
+  display: none;
 }
 </style>

@@ -17,12 +17,12 @@
       @click="getInfo(i.answerID)"
     >
       <div
-        class="line-height-8 line-clamp-5 text-justify"
+        class="line-height-8 line-clamp-5 text-justify max-h-50"
         v-html="i.content"
       ></div>
       <!-- <span class="color-#aaa font-size-3">{{ i.answerID }}</span> -->
       <div
-        class="flex flex-justify-between flex-items-center mt-20px color-#999"
+        class="flex flex-justify-between flex-items-center mt-10px color-#999"
       >
         <div>
           <div>
@@ -36,9 +36,14 @@
             :href="'https://www.zhihu.com/people/' + i.author.urlToken"
             rel="noreferrer"
             target="_blank"
+            class="flex items-center"
           >
-            {{ i.author.name }}
-            <img :src="i.author?.avatarURL" class="w-38px rounded ml-3" />
+            <span>{{ i.author.name }}</span>
+            <img
+              :src="i.author?.avatarURL"
+              class="w-38px rounded ml-3"
+              :alt="i.author.name"
+            />
           </a>
         </div>
       </div>
@@ -105,11 +110,14 @@ const getInfo = (id) => {
     text-indent: 0;
   }
 }
-:deep img {
-  max-width: 100%;
-  height: auto;
-}
-:deep .ContentItem-actions {
-  display: none;
+:deep {
+  img {
+    max-width: 100%;
+    height: auto;
+  }
+
+  .ContentItem-actions {
+    display: none;
+  }
 }
 </style>

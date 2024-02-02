@@ -35,7 +35,7 @@ const sortby = ref('censored_time_or_answer_censored_updated');
 const { data, pending, error, refresh } = await useFetch(
   'https://api.mcdonald.workers.dev/questions',
   {
-    query: { sortby, pagesize: 30, page: 2, sortorder: 'desc' },
+    query: { sortby, pagesize: 30, page: 1, sortorder: 'desc' },
   }
 );
 const list = ref(data);

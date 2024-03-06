@@ -1,5 +1,5 @@
 <template>
-  <ul>
+  <ul ref="observerEl">
     <li v-for="i in list.data">
       <NuxtLink
         :to="'/question/' + i.id"
@@ -23,28 +23,32 @@
 </template>
 
 <script setup>
-import { ref } from 'vue';
-import '~/assets/css/index.css';
+import "~/assets/css/index.css";
+import { ref } from "vue";
 const appConfig = useAppConfig();
 const route = useRoute();
 
-console.log('appConfig', appConfig);
-console.log('route', route);
+console.log("appConfig", appConfig);
+console.log("route", route);
 
-const sortby = ref('censored_time_or_answer_censored_updated');
-const { data, pending, error, refresh } = await useFetch(
-  'https://api.mcdonald.workers.dev/questions',
-  {
-    query: { sortby, pagesize: 30, page: 1, sortorder: 'desc' },
-  }
-);
+const page = ref(1);
+const sortby = ref("censored_time_or_answer_censored_updated");
+const { data } = await useFetch("https://api.mcdonald.workers.dev/questions", {
+  query: {
+    page,
+    sortby,
+    pagesize: 30,
+    sortorder: "desc",
+  },
+});
 const list = ref(data);
+
+// 检测滚动到页面底部，加载更多
 </script>
 <style lang="scss" scoped>
 ul {
   margin: 30px auto;
-  // width: 800px;
-  max-width: 80%;
+  max-width: min(50rem, 80vw);
   padding: 0;
   list-style: none;
   li {

@@ -1,23 +1,16 @@
 <template>
-  <div class="max-w-3xl ma">
-    <h3 class="m-16px leading-8 text-6">{{ info?.data?.title }}</h3>
+  <div class="max-w-[min(50rem,80vw)] ma">
+    <h3 class="p-16px leading-8 text-6 sticky top-0 z-1">
+      {{ info?.data?.title }}
+    </h3>
     <div
       v-for="i in info?.data.answers"
-      class="
-        relative
-        mb-30px
-        p-15px
-        bg-#ececec
-        overflow-hidden
-        mx-16px
-        rd-4
-        cursor-pointer
-      "
+      class="list-item relative mb-30px p-15px bg-#eee overflow-hidden mx-16px rd-4 cursor-pointer"
       :class="{ 'censor-item': i.censored }"
       @click="getInfo(i.answerID)"
     >
       <div
-        class="line-height-8 line-clamp-5 text-justify max-h-50"
+        class="line-height-8 text-justify mx-3 pt-2"
         v-html="i.content"
       ></div>
       <!-- <span class="color-#aaa font-size-3">{{ i.answerID }}</span> -->
@@ -26,7 +19,7 @@
       >
         <div>
           <div>
-            {{ itemFilter(i.excerpt).iptime }}
+            <!-- {{ itemFilter(i.excerpt).iptime }} -->
           </div>
         </div>
 
@@ -53,52 +46,67 @@
 </template>
 
 <script setup>
-import { ref } from 'vue';
+import { ref } from "vue";
 const { params } = useRoute();
 
-const sortby = ref('censored');
+const sortby = ref("censored");
 const { data, pending, error, refresh } = await useFetch(
-  'https://api.mcdonald.workers.dev/questions/' + params.id,
+  "https://api.mcdonald.workers.dev/questions/" + params.id,
   {
-    query: { sortby, pagesize: 20, page: 1, sortorder: 'desc' },
+    query: { sortby, pagesize: 20, page: 1, sortorder: "desc" },
   }
 );
-// console.log(data.value.data);
+//
 const info = ref(data);
 const answerID = ref(null);
 const itemFilter = (item) => {
   const regex =
     /(发布于|编辑于) (\d{4}-\d{2}-\d{2} \d{2}:\d{2})・IP 属地(.*?)(赞同|真诚)/;
   const match = regex.exec(item);
-  console.log(match);
+
   if (match?.length < 5) return item;
   // const action = match[1];
   const time = match[2];
   const ip = match[3];
   const content = item.split(match[0])[0].trim();
-  // console.log('时间 A:', time);
-  // console.log('IP A:', ip);
-  // console.log('内容 A:', content);
-  console.log('---------------------');
+  //
+  //
+  //
 
   return { content, ip, time };
 };
 
-const getInfo = (id) => {
-  console.log(id);
+const getInfo = (id) => {};
+
+const imgFilter = () => {
+  // 检查所有的img，如果src为 data:image/svg+xml;utf8, 则替换为属性data-actualsrc
+  const imgs = document.querySelectorAll(
+    // ".RichContent img.origin_image.zh-lightbox-thumb.lazy",
+    // ".RichContent img.content_image.lazy"
+    ".RichContent figure img.lazy"
+  );
+  imgs.forEach((img) => {
+    if (img.src.startsWith("data:image/svg+xml;")) {
+      console.log("replace", img.getAttribute("data-actualsrc"));
+
+      img.src = img.getAttribute("data-actualsrc");
+    }
+  });
 };
+onMounted(() => {
+  imgFilter();
+});
 </script>
 <style lang="scss" scoped>
-@import 'https://static.zhihu.com/heifetz/main.216a26f4.636280215996da924864.css';
-@import 'https://static.zhihu.com/heifetz/main-question-routes.216a26f4.76cd58bb46c08ca4ab3c.css';
+@import "https://static.zhihu.com/heifetz/main.216a26f4.636280215996da924864.css";
+// @import "https://static.zhihu.com/heifetz/main-question-routes.216a26f4.76cd58bb46c08ca4ab3c.css";
 .censor-item {
-  text-indent: 1.5em;
-  background: #eee;
+  // text-indent: 1.5em;
   &:first-letter {
     font-size: 2em;
   }
   &:before {
-    content: '已审查';
+    content: "已审查";
     position: absolute;
     left: -22px;
     top: 11px;
@@ -110,13 +118,17 @@ const getInfo = (id) => {
     text-indent: 0;
   }
 }
+html[data-theme="dark"] .list-item {
+  background: #191b1f;
+}
 :deep {
-  img {
-    max-width: 100%;
+  figure img {
+    width: 100%;
     height: auto;
   }
 
-  .ContentItem-actions {
+  .ContentItem-actions,
+  .Reward {
     display: none;
   }
 }

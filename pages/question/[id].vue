@@ -46,14 +46,14 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
+import { ref } from 'vue';
 const { params } = useRoute();
 
-const sortby = ref("censored");
+const sortby = ref('censored');
 const { data, pending, error, refresh } = await useFetch(
-  "https://api.mcdonald.workers.dev/questions/" + params.id,
+  'https://api.mcdonald.workers.dev/questions/' + params.id,
   {
-    query: { sortby, pagesize: 20, page: 1, sortorder: "desc" },
+    query: { sortby, pagesize: 20, page: 1, sortorder: 'desc' },
   }
 );
 //
@@ -70,8 +70,6 @@ const itemFilter = (item) => {
   const ip = match[3];
   const content = item.split(match[0])[0].trim();
   //
-  //
-  //
 
   return { content, ip, time };
 };
@@ -83,13 +81,13 @@ const imgFilter = () => {
   const imgs = document.querySelectorAll(
     // ".RichContent img.origin_image.zh-lightbox-thumb.lazy",
     // ".RichContent img.content_image.lazy"
-    ".RichContent figure img.lazy"
+    '.RichContent figure img.lazy'
   );
   imgs.forEach((img) => {
-    if (img.src.startsWith("data:image/svg+xml;")) {
-      console.log("replace", img.getAttribute("data-actualsrc"));
+    if (img.src.startsWith('data:image/svg+xml;')) {
+      console.log('replace', img.getAttribute('data-actualsrc'));
 
-      img.src = img.getAttribute("data-actualsrc");
+      img.src = img.getAttribute('data-actualsrc');
     }
   });
 };
@@ -98,7 +96,7 @@ onMounted(() => {
 });
 </script>
 <style lang="scss" scoped>
-@import "https://static.zhihu.com/heifetz/main.216a26f4.636280215996da924864.css";
+@import 'https://static.zhihu.com/heifetz/main.216a26f4.636280215996da924864.css';
 // @import "https://static.zhihu.com/heifetz/main-question-routes.216a26f4.76cd58bb46c08ca4ab3c.css";
 .censor-item {
   // text-indent: 1.5em;
@@ -106,7 +104,7 @@ onMounted(() => {
     font-size: 2em;
   }
   &:before {
-    content: "已审查";
+    content: '已审查';
     position: absolute;
     left: -22px;
     top: 11px;
@@ -118,7 +116,7 @@ onMounted(() => {
     text-indent: 0;
   }
 }
-html[data-theme="dark"] .list-item {
+html[data-theme='dark'] .list-item {
   background: #191b1f;
 }
 :deep {
